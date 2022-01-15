@@ -1,6 +1,18 @@
 @import "assets/style/css-reset";
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+  --clr-test: #1C1B1F;
+  --clr-background: #EADDFF;
+  --clr-form: #6750A4;
+}
 
 body {
   font-family: 'Roboto', sans-serif;
+  color: var(--clr-test);
+}
+
+.timesheet-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
 }

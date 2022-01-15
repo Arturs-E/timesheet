@@ -3,7 +3,9 @@ import './App.scss';
 import Timesheet from './pages/Timesheet';
 
 const App = (): JSX.Element => (
-  <Timesheet />
+  <div className="timesheet-wrapper">
+    <Timesheet />
+  </div>
 );
 
 export default App;
