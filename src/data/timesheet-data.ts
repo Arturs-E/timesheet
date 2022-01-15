@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { allEmployees, getAllWeeks, getRandomHours } from '../helpers/helpers';
 
 type TimesheetDataWeeks = {
@@ -19,6 +20,8 @@ type TimesheetData = {
 const timesheetData: TimesheetData[] = [];
 const weeks = getAllWeeks();
 const weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+const currentDayOfTheWeek = format(new Date(), 'EEEE').toLowerCase();
+const currentDaysIndex = weekdays.indexOf(currentDayOfTheWeek);
 
 for (let i = 0; i < allEmployees.length; i += 1) {
   const personData: TimesheetData = {
@@ -33,6 +36,17 @@ for (let i = 0; i < allEmployees.length; i += 1) {
     };
 
     for (let k = 0; k < 7; k += 1) {
+      if (!j) {
+        if (k >= currentDaysIndex) {
+          weeklyData.weeklyHours.push({ day: weekdays[k], hoursWorked: 0 });
+          // eslint-disable-next-line no-continue
+          continue;
+        } else {
+          weeklyData.weeklyHours.push({ day: weekdays[k], hoursWorked: getRandomHours(13) });
+          // eslint-disable-next-line no-continue
+          continue;
+        }
+      }
       weeklyData.weeklyHours.push({ day: weekdays[k], hoursWorked: getRandomHours(13) });
     }
 
