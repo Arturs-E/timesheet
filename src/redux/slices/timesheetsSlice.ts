@@ -10,8 +10,8 @@ type UpdateHoursPayload = {
 
 const initialState: TimesheetData[] = timesheetData;
 
-const timesheetsSlice = createSlice(({
-  name: 'timesheets',
+const timesheetSlice = createSlice(({
+  name: 'timesheet',
   initialState,
   reducers: {
     updateHours: (state, action: PayloadAction<UpdateHoursPayload>) => state.map((item) => {
@@ -35,7 +35,7 @@ const timesheetsSlice = createSlice(({
   },
 }));
 
-const { updateHours } = timesheetsSlice.actions;
-const timesheetsSliceReducer = timesheetsSlice.reducer;
+const { updateHours } = timesheetSlice.actions;
+const timesheetSliceReducer = timesheetSlice.reducer;
 
-export { timesheetsSliceReducer, updateHours };
+export { timesheetSliceReducer, updateHours };

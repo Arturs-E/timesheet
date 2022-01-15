@@ -49,10 +49,10 @@ const getRandomHours = (maxNumber: number): number => Math.floor(Math.random() *
 
 const getRandomHourRate = (maxNumber: number): number => Math.floor(Math.random() * maxNumber + 5);
 
-const getDaysEarnings = (hours: number, hourRate: number, day: string): string => (
+const getDaysEarnings = (hours: number, hourRate: number, day: string): number => (
   day === 'saturday' || day === 'sunday'
-    ? `\u20AC${(hours * hourRate * 2).toFixed(2)}`
-    : `\u20AC${(hours * hourRate).toFixed(2)}`
+    ? (hours * hourRate * 2)
+    : (hours * hourRate)
 );
 
 export {

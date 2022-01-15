@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { timesheetsSliceReducer } from '../slices/timesheetsSlice';
+import { timesheetSliceReducer } from '../slices/timesheetsSlice';
 
 export const store = configureStore({
   reducer: {
-    timesheets: timesheetsSliceReducer,
+    timesheet: timesheetSliceReducer,
   },
 });
 
