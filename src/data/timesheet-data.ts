@@ -22,7 +22,7 @@ const weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'satur
 
 for (let i = 0; i < allEmployees.length; i += 1) {
   const personData: TimesheetData = {
-    nameId: allEmployees[i].id, name: allEmployees[i].value, hourRate: 10, hours: [],
+    nameId: allEmployees[i].id, name: allEmployees[i].value, hourRate: getRandomHours(20), hours: [],
   };
 
   for (let j = 0; j < weeks.length; j += 1) {

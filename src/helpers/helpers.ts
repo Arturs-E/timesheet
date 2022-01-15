@@ -47,6 +47,8 @@ const allEmployees = getAllEmployees();
 
 const getRandomHours = (maxNumber: number): number => Math.floor(Math.random() * maxNumber);
 
+const getRandomHourRate = (maxNumber: number): number => Math.floor(Math.random() * maxNumber + 5);
+
 const getDaysEarnings = (hours: number, hourRate: number, day: string): string => (
   day === 'saturday' || day === 'sunday'
     ? `\u20AC${(hours * hourRate * 2).toFixed(2)}`
@@ -54,5 +56,5 @@ const getDaysEarnings = (hours: number, hourRate: number, day: string): string =
 );
 
 export {
-  getAllWeeks, allEmployees, getRandomHours, getDaysEarnings,
+  getAllWeeks, allEmployees, getRandomHours, getRandomHourRate, getDaysEarnings,
 };
