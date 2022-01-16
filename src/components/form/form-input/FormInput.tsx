@@ -9,6 +9,7 @@ type FormInputProps = {
 
 const FormInput:FC<FormInputProps> = ({ label, value, changeHandler }) => (
   <TextField
+    variant="outlined"
     id={`${label}-input`}
     label={label}
     type="number"
@@ -21,7 +22,11 @@ const FormInput:FC<FormInputProps> = ({ label, value, changeHandler }) => (
       },
     }}
     inputProps={{ style: { textAlign: 'center', color: 'inherit' } }}
-    sx={{ maxWidth: 120 }}
+    sx={{
+      maxWidth: 120,
+      '& .MuiOutlinedInput-input': { padding: '14px' },
+      '& .MuiOutlinedInput-notchedOutline': { border: '2px solid var(--clr-form)' },
+    }}
   />
 );
 

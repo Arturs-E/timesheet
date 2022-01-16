@@ -19,4 +19,9 @@
     align-items: center;
     font-weight: 500;
   }
+
+  &__hours-heading-wrapper {
+    display: flex;
+    justify-content: center;
+  }
 }

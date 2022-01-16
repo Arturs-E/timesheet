@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import { InputLabel, MenuItem, Select } from '@mui/material';
+import { InputAdornment, MenuItem, TextField } from '@mui/material';
+import Person from '@mui/icons-material/Person';
 
 type FormSelectProps = {
   label: string;
@@ -11,27 +12,36 @@ type FormSelectProps = {
 const FormSelect:FC<FormSelectProps> = ({
   label, options, value, changeHandler,
 }): JSX.Element => (
-  <>
-    <InputLabel
-      id={`${label}-select-label`}
-      style={{ color: 'var(--clr-form)', fontWeight: 'bold', letterSpacing: '1px' }}
-    >
-      {label}
-    </InputLabel>
-    <Select
-      variant="outlined"
-      labelId={`${label}-select-label`}
-      id={`${label}-select`}
-      label={label}
-      value={value}
-      onChange={(e) => changeHandler(e.target.value)}
-      inputProps={{ style: { fontWeight: '500', color: 'inherit' } }}
-    >
-      {options.map((item) => (
-        <MenuItem key={item.id} value={item.id}>{item.value}</MenuItem>
-      ))}
-    </Select>
-  </>
+  <TextField
+    id={`${label}-select`}
+    select
+    label={label}
+    placeholder="placeholder"
+    value={value}
+    onChange={(e) => changeHandler(e.target.value)}
+    sx={{
+      '& .MuiOutlinedInput-input': { padding: '14px' },
+      '& .MuiOutlinedInput-notchedOutline': { border: '2px solid var(--clr-form)' },
+    }}
+    InputLabelProps={{
+      shrink: true,
+      style: {
+        textTransform: 'capitalize', fontWeight: 'bold', color: 'var(--clr-form)', letterSpacing: '1px',
+      },
+    }}
+    InputProps={{
+      style: { color: 'inherit' },
+      startAdornment: (
+        <InputAdornment position="start">
+          <Person />
+        </InputAdornment>
+      ),
+    }}
+  >
+    {options.map((item) => (
+      <MenuItem key={item.id} value={item.id}>{item.value}</MenuItem>
+    ))}
+  </TextField>
 );
 
 export default FormSelect;

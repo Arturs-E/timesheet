@@ -6,6 +6,7 @@ import { useAppDispatch } from '../../../redux/store/hooks';
 import { updateHours } from '../../../redux/slices/timesheetsSlice';
 import { SelectValues } from '../../../pages/Timesheet';
 import './HoursSection.scss';
+import Heading3 from '../../../components/headings/Heading3';
 
 type HoursSectionProps = {
   selectedEmployeesWeek: TimesheetDataWeeks | undefined;
@@ -45,7 +46,11 @@ const HoursSection:FC<HoursSectionProps> = ({
                 </span>
               </div>
             )))
-          : (<h3 style={{ textAlign: 'center' }}>Please choose the employee and week of interest!</h3>)
+          : (
+            <div className="timesheet__hours-heading-wrapper">
+              <Heading3>Please choose the employee and week of interest!</Heading3>
+            </div>
+          )
       }
     </div>
   );

@@ -1,5 +1,7 @@
 import { TimesheetDataWeeks } from '../data/timesheet-data';
 
+const EUR_SYMBOL = '\u20AC';
+
 const getDaysEarnings = (hours: number, hourRate: number, day: string): number => (
   day === 'saturday' || day === 'sunday'
     ? (hours * hourRate * 2)
@@ -7,7 +9,7 @@ const getDaysEarnings = (hours: number, hourRate: number, day: string): number =
 );
 
 const getDaysEarningsValue = (hourRate: number | undefined, hoursWorked: number, day: string): string => (
-  hourRate ? `\u20AC${getDaysEarnings(hoursWorked, hourRate, day).toFixed(2)}` : ''
+  hourRate ? `${EUR_SYMBOL}${getDaysEarnings(hoursWorked, hourRate, day).toFixed(2)}` : ''
 );
 
 const getTotalWeeklyHours = (selectedEmployeesWeek: TimesheetDataWeeks | undefined): number | undefined => {
@@ -25,7 +27,7 @@ const getTotalWeeklySalary = (
   if (hourRate && selectedEmployeesWeek) {
     const weeksSalary = selectedEmployeesWeek.weeklyHours
       .reduce((a, b) => a + getDaysEarnings(b.hoursWorked, hourRate, b.day), 0);
-    return `\u20AC${weeksSalary.toFixed(2)}`;
+    return `${EUR_SYMBOL}${weeksSalary.toFixed(2)}`;
   }
   return undefined;
 };
