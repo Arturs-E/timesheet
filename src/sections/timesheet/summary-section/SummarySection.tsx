@@ -27,12 +27,7 @@ const SummarySection:FC<SummarySectionProps> = ({
           <th>Salary</th>
           <td>
             {selectedEmployeesWeek && (isLoading
-              ? (
-                <CircularProgress
-                  color="secondary"
-                  size="1rem"
-                />
-              )
+              ? (<CircularProgress color="secondary" size="1rem" />)
               : totalWeeklySalary)}
           </td>
         </tr>

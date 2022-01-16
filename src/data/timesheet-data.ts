@@ -7,6 +7,7 @@ type TimesheetDataWeeks = {
   weeklyHours: {
     day: string;
     hoursWorked: number;
+    isLoading: boolean;
   }[]
 }
 
@@ -41,12 +42,20 @@ for (let i = 0; i < allEmployees.length; i += 1) {
     for (let k = 0; k < 7; k += 1) {
       if (!j) {
         if (k >= currentDaysIndex) {
-          weeklyData.weeklyHours.push({ day: weekdays[k], hoursWorked: 0 });
+          weeklyData.weeklyHours.push({ day: weekdays[k], hoursWorked: 0, isLoading: false });
         } else {
-          weeklyData.weeklyHours.push({ day: weekdays[k], hoursWorked: getRandomHours(13) });
+          weeklyData.weeklyHours.push({
+            day: weekdays[k],
+            hoursWorked: getRandomHours(13),
+            isLoading: false,
+          });
         }
       } else {
-        weeklyData.weeklyHours.push({ day: weekdays[k], hoursWorked: getRandomHours(13) });
+        weeklyData.weeklyHours.push({
+          day: weekdays[k],
+          hoursWorked: getRandomHours(13),
+          isLoading: false,
+        });
       }
     }
 
