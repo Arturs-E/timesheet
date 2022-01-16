@@ -1,0 +1,10 @@
+.timesheet {
+
+  &__selection-container {
+    padding: 48px 24px 18px;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+    background-color: var(--clr-background);
+  }
+}

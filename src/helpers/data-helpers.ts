@@ -15,7 +15,6 @@ type Employee = {
 
 const getAllWeeks = (): Week[] => {
   const weeks: Week[] = [];
-
   const endOfThisWeek = endOfWeek(new Date(), { weekStartsOn: 1 });
   const startOfThisWeek = startOfWeek(new Date(), { weekStartsOn: 1 });
 
@@ -27,13 +26,9 @@ const getAllWeeks = (): Week[] => {
     const sundayToString = format(sunday, 'dd MMM yyyy');
 
     weeks.push(
-      {
-        id: `week${i}`,
-        value: `${mondayToString} - ${sundayToString}`,
-      },
+      { id: `week${i}`, value: `${mondayToString} - ${sundayToString}` },
     );
   }
-
   return weeks;
 };
 
@@ -43,18 +38,16 @@ const getAllEmployees = (): Employee[] => [
   { id: uuidv4(), value: 'Sophia Davis' },
 ];
 
+const allWeeks = getAllWeeks();
 const allEmployees = getAllEmployees();
 
 const getRandomHours = (maxNumber: number): number => Math.floor(Math.random() * maxNumber);
-
 const getRandomHourRate = (maxNumber: number): number => Math.floor(Math.random() * maxNumber + 5);
 
-const getDaysEarnings = (hours: number, hourRate: number, day: string): number => (
-  day === 'saturday' || day === 'sunday'
-    ? (hours * hourRate * 2)
-    : (hours * hourRate)
-);
-
 export {
-  getAllWeeks, allEmployees, getRandomHours, getRandomHourRate, getDaysEarnings,
+  allWeeks,
+  getAllWeeks,
+  allEmployees,
+  getRandomHours,
+  getRandomHourRate,
 };

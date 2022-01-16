@@ -1,0 +1,27 @@
+.timesheet {
+
+  &__summary-container {
+    padding: 32px 24px;
+    display: flex;
+    justify-content: center;
+    background-color: var(--clr-background);
+  }
+
+  &__summary-table {
+    border-collapse: collapse;
+
+    & tr th,td {
+      padding: 10px 20px;
+    }
+
+    & tr th {
+      text-align: left;
+      font-weight: 500;
+    }
+
+    & tr td {
+      text-align: right;
+      font-weight: 500;
+    }
+  }
+}

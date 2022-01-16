@@ -1,39 +1,34 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Timesheet.scss';
-import { FormControl } from '@mui/material';
-import FormSelect from '../components/form/form-select/FormSelect';
-import { allEmployees, getAllWeeks, getDaysEarnings } from '../helpers/helpers';
 import FormInput from '../components/form/form-input/FormInput';
 import { useAppDispatch, useAppSelector } from '../redux/store/hooks';
 import { updateHours } from '../redux/slices/timesheetsSlice';
+import SummarySection from '../sections/timesheet/summary-section/SummarySection';
+import { getDaysEarningsValue, getTotalWeeklyHours, getTotalWeeklySalary } from '../helpers/timesheet-helpers';
+import SelectionSection from '../sections/timesheet/selection-section/SelectionSection';
 
-type FormValues = {
+type SelectValues = {
   employee: string;
   week: string
 }
 
 const Timesheet = (): JSX.Element => {
-  const [selectValues, setSelectValues] = useState<FormValues>({ employee: '', week: '' });
+  const [selectValues, setSelectValues] = useState<SelectValues>({ employee: '', week: '' });
   const [isLoading, setIsLoading] = useState(false);
-  const initialRender = useRef(true);
 
-  const weeklyHours = useAppSelector((state) => state.timesheet
+  const selectedEmployeesWeek = useAppSelector((state) => state.timesheet
     .find((item) => item.nameId === selectValues.employee))
     ?.hours.find((item) => item.weekId === selectValues.week);
+
   const hourRate = useAppSelector((state) => state.timesheet
-    .find((item) => item.nameId === selectValues.employee)?.hourRate);
+    .find((item) => item.nameId === selectValues.employee))?.hourRate;
 
   useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false;
-      return undefined;
-    }
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
     }, 500);
-    return undefined;
-  }, [selectValues, weeklyHours]);
+  }, [selectValues, selectedEmployeesWeek]);
 
   const dispatch = useAppDispatch();
 
@@ -43,50 +38,17 @@ const Timesheet = (): JSX.Element => {
     }));
   };
 
-  const getDaysEarningsValue = (hoursWorked: number, day: string): string => (
-    hourRate ? `\u20AC${getDaysEarnings(hoursWorked, hourRate, day).toFixed(2)}` : ''
-  );
-
-  const getTotalWeeklyHours = (): number | undefined => {
-    if (weeklyHours) {
-      return weeklyHours.weeklyHours
-        .reduce((a, b) => a + b.hoursWorked, 0);
-    }
-    return undefined;
-  };
-
-  const getTotalWeeklySalary = (): number | undefined => {
-    if (hourRate && weeklyHours) {
-      return weeklyHours.weeklyHours
-        .reduce((a, b) => a + getDaysEarnings(b.hoursWorked, hourRate, b.day), 0);
-    }
-    return undefined;
-  };
-
   return (
     <div className="timesheet">
-      <div className="timesheet__selection-container">
-        <FormControl fullWidth>
-          <FormSelect
-            label="Employee"
-            options={allEmployees}
-            value={selectValues.employee}
-            changeHandler={(employee) => setSelectValues({ ...selectValues, employee })}
-          />
-        </FormControl>
-        <FormControl fullWidth>
-          <FormSelect
-            label="Week"
-            options={getAllWeeks()}
-            value={selectValues.week}
-            changeHandler={(week) => setSelectValues({ ...selectValues, week })}
-          />
-        </FormControl>
-      </div>
+      <SelectionSection
+        selectValues={selectValues}
+        onEmployeeChange={(employee) => setSelectValues({ ...selectValues, employee })}
+        onWeekChange={(week) => setSelectValues({ ...selectValues, week })}
+      />
       <div className="timesheet__hours-container">
         {
-          weeklyHours
-            ? (weeklyHours
+          selectedEmployeesWeek
+            ? (selectedEmployeesWeek
               .weeklyHours.map(({ day, hoursWorked }) => (
                 <div key={day} className="timesheet__hours-row">
                   <FormInput
@@ -95,23 +57,22 @@ const Timesheet = (): JSX.Element => {
                     changeHandler={(value: string) => onHourChange(+value, day)}
                   />
                   <span className="timesheet__day-earnings">
-                    {isLoading ? 'loading' : getDaysEarningsValue(hoursWorked, day)}
+                    {isLoading ? 'loading' : getDaysEarningsValue(hourRate, hoursWorked, day)}
                   </span>
                 </div>
               )))
             : (<h3 style={{ textAlign: 'center' }}>Please choose the employee and week of interest!</h3>)
         }
       </div>
-      <div className="timesheet__summary-container">
-        <div className="timesheet__summary-hours-container">
-          {weeklyHours && `Hours worked: ${getTotalWeeklyHours()}`}
-        </div>
-        <div className="timesheet__summary__salary-container">
-          {isLoading ? 'loading' : `Salary: \u20AC${getTotalWeeklySalary()?.toFixed(2)}`}
-        </div>
-      </div>
+      <SummarySection
+        isLoading={isLoading}
+        totalWeeklyHours={getTotalWeeklyHours(selectedEmployeesWeek)}
+        totalWeeklySalary={getTotalWeeklySalary(hourRate, selectedEmployeesWeek)}
+        selectedEmployeesWeek={selectedEmployeesWeek}
+      />
     </div>
   );
 };
 
 export default Timesheet;
+export type { SelectValues };

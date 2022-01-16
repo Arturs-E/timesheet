@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { allEmployees, getAllWeeks, getRandomHours } from '../helpers/helpers';
+import { allEmployees, allWeeks, getRandomHours } from '../helpers/data-helpers';
 
 type TimesheetDataWeeks = {
   weekId: string;
@@ -18,7 +18,7 @@ type TimesheetData = {
 }
 
 const timesheetData: TimesheetData[] = [];
-const weeks = getAllWeeks();
+const weeks = allWeeks;
 const weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 const currentDayOfTheWeek = format(new Date(), 'EEEE').toLowerCase();
 const currentDaysIndex = weekdays.indexOf(currentDayOfTheWeek);
@@ -39,15 +39,12 @@ for (let i = 0; i < allEmployees.length; i += 1) {
       if (!j) {
         if (k >= currentDaysIndex) {
           weeklyData.weeklyHours.push({ day: weekdays[k], hoursWorked: 0 });
-          // eslint-disable-next-line no-continue
-          continue;
         } else {
           weeklyData.weeklyHours.push({ day: weekdays[k], hoursWorked: getRandomHours(13) });
-          // eslint-disable-next-line no-continue
-          continue;
         }
+      } else {
+        weeklyData.weeklyHours.push({ day: weekdays[k], hoursWorked: getRandomHours(13) });
       }
-      weeklyData.weeklyHours.push({ day: weekdays[k], hoursWorked: getRandomHours(13) });
     }
 
     personData.hours.push(weeklyData);
@@ -57,4 +54,4 @@ for (let i = 0; i < allEmployees.length; i += 1) {
 }
 
 export { timesheetData };
-export type { TimesheetData };
+export type { TimesheetData, TimesheetDataWeeks };

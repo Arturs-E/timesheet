@@ -1,0 +1,35 @@
+import { TimesheetDataWeeks } from '../data/timesheet-data';
+
+const getDaysEarnings = (hours: number, hourRate: number, day: string): number => (
+  day === 'saturday' || day === 'sunday'
+    ? (hours * hourRate * 2)
+    : (hours * hourRate)
+);
+
+const getDaysEarningsValue = (hourRate: number | undefined, hoursWorked: number, day: string): string => (
+  hourRate ? `\u20AC${getDaysEarnings(hoursWorked, hourRate, day).toFixed(2)}` : ''
+);
+
+const getTotalWeeklyHours = (selectedEmployeesWeek: TimesheetDataWeeks | undefined): number | undefined => {
+  if (selectedEmployeesWeek) {
+    return selectedEmployeesWeek.weeklyHours
+      .reduce((a, b) => a + b.hoursWorked, 0);
+  }
+  return undefined;
+};
+
+const getTotalWeeklySalary = (
+  hourRate: number | undefined,
+  selectedEmployeesWeek: TimesheetDataWeeks | undefined,
+): string | undefined => {
+  if (hourRate && selectedEmployeesWeek) {
+    const weeksSalary = selectedEmployeesWeek.weeklyHours
+      .reduce((a, b) => a + getDaysEarnings(b.hoursWorked, hourRate, b.day), 0);
+    return `\u20AC${weeksSalary.toFixed(2)}`;
+  }
+  return undefined;
+};
+
+export {
+  getDaysEarnings, getDaysEarningsValue, getTotalWeeklyHours, getTotalWeeklySalary,
+};

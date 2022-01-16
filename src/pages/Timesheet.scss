@@ -1,13 +1,5 @@
 .timesheet {
 
-  &__selection-container {
-    padding: 48px 24px 18px;
-    display: grid;
-    grid-template-columns: 1fr;
-    row-gap: 24px;
-    background-color: var(--clr-background);
-  }
-
   &__hours-container {
     padding: 12px 24px;
     display: grid;
@@ -26,14 +18,6 @@
     display: flex;
     align-items: center;
     font-weight: 500;
-  }
-
-  &__summary-container {
-    padding: 48px 24px;
-    display: grid;
-    grid-template-columns: 1fr;
-    row-gap: 24px;
-    background-color: var(--clr-background);
   }
 
 }
