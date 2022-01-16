@@ -18,14 +18,14 @@ const FormInput:FC<FormInputProps> = ({ label, value, changeHandler }) => (
     InputLabelProps={{
       shrink: true,
       style: {
-        textTransform: 'capitalize', fontWeight: 'bold', color: 'var(--clr-form)', letterSpacing: '1px',
+        textTransform: 'capitalize', fontWeight: 'bold', color: 'var(--clr-primary)', letterSpacing: '1px',
       },
     }}
     inputProps={{ style: { textAlign: 'center', color: 'inherit' } }}
     sx={{
       maxWidth: 120,
-      '& .MuiOutlinedInput-input': { padding: '14px' },
-      '& .MuiOutlinedInput-notchedOutline': { border: '2px solid var(--clr-form)' },
+      '& .MuiOutlinedInput-input': { padding: '0.8rem' },
+      '& .MuiOutlinedInput-notchedOutline': { border: '2px solid var(--clr-primary)' },
     }}
   />
 );

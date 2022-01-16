@@ -1,39 +1,39 @@
-import React, { FC } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { InputAdornment, MenuItem, TextField } from '@mui/material';
-import Person from '@mui/icons-material/Person';
+import './FormSelect.scss';
 
 type FormSelectProps = {
   label: string;
   options: { id: string, value: string }[];
   value: string;
   changeHandler: (value: string) => void;
+  icon: ReactElement;
 }
 
 const FormSelect:FC<FormSelectProps> = ({
-  label, options, value, changeHandler,
+  label, options, value, changeHandler, icon,
 }): JSX.Element => (
   <TextField
     id={`${label}-select`}
     select
     label={label}
-    placeholder="placeholder"
     value={value}
     onChange={(e) => changeHandler(e.target.value)}
     sx={{
-      '& .MuiOutlinedInput-input': { padding: '14px' },
-      '& .MuiOutlinedInput-notchedOutline': { border: '2px solid var(--clr-form)' },
+      '& .MuiOutlinedInput-input': { padding: '0.8rem' },
+      '& .MuiOutlinedInput-notchedOutline': { border: '2px solid var(--clr-primary)' },
     }}
     InputLabelProps={{
       shrink: true,
       style: {
-        textTransform: 'capitalize', fontWeight: 'bold', color: 'var(--clr-form)', letterSpacing: '1px',
+        textTransform: 'capitalize', fontWeight: 'bold', color: 'var(--clr-primary)', letterSpacing: '1px',
       },
     }}
     InputProps={{
       style: { color: 'inherit' },
       startAdornment: (
         <InputAdornment position="start">
-          <Person />
+          {icon}
         </InputAdornment>
       ),
     }}

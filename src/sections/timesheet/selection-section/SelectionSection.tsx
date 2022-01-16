@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { FormControl } from '@mui/material';
+import { DateRange, Person } from '@mui/icons-material';
 import FormSelect from '../../../components/form/form-select/FormSelect';
 import { allEmployees, allWeeks } from '../../../helpers/data-helpers';
 import { SelectValues } from '../../../pages/Timesheet';
@@ -17,22 +17,20 @@ const SelectionSection:FC<SelectionSectionProps> = ({
   onWeekChange,
 }): JSX.Element => (
   <div className="timesheet__selection-container">
-    <FormControl fullWidth>
-      <FormSelect
-        label="Employee"
-        options={allEmployees}
-        value={selectValues.employee}
-        changeHandler={onEmployeeChange}
-      />
-    </FormControl>
-    <FormControl fullWidth>
-      <FormSelect
-        label="Week"
-        options={allWeeks}
-        value={selectValues.week}
-        changeHandler={onWeekChange}
-      />
-    </FormControl>
+    <FormSelect
+      label="Employee"
+      options={allEmployees}
+      value={selectValues.employee}
+      changeHandler={onEmployeeChange}
+      icon={<Person />}
+    />
+    <FormSelect
+      label="Week"
+      options={allWeeks}
+      value={selectValues.week}
+      changeHandler={onWeekChange}
+      icon={<DateRange />}
+    />
   </div>
 );
 

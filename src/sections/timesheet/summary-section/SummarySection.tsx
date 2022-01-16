@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { CircularProgress } from '@mui/material';
 import { TimesheetDataWeeks } from '../../../data/timesheet-data';
 import './SummarySection.scss';
 
@@ -17,14 +18,25 @@ const SummarySection:FC<SummarySectionProps> = ({
 }): JSX.Element => (
   <div className="timesheet__summary-container">
     <table className="timesheet__summary-table">
-      <tr>
-        <th>Hours worked</th>
-        <td>{totalWeeklyHours}</td>
-      </tr>
-      <tr>
-        <th>Salary</th>
-        <td>{selectedEmployeesWeek && (isLoading ? 'loading' : totalWeeklySalary)}</td>
-      </tr>
+      <tbody>
+        <tr>
+          <th>Hours worked</th>
+          <td>{totalWeeklyHours}</td>
+        </tr>
+        <tr>
+          <th>Salary</th>
+          <td>
+            {selectedEmployeesWeek && (isLoading
+              ? (
+                <CircularProgress
+                  color="secondary"
+                  size="1rem"
+                />
+              )
+              : totalWeeklySalary)}
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 );

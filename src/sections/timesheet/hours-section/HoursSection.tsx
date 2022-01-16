@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { CircularProgress } from '@mui/material';
 import FormInput from '../../../components/form/form-input/FormInput';
 import { getDaysEarningsValue } from '../../../helpers/timesheet-helpers';
 import { TimesheetDataWeeks } from '../../../data/timesheet-data';
@@ -42,7 +43,14 @@ const HoursSection:FC<HoursSectionProps> = ({
                   changeHandler={(value: string) => onHourChange(+value, day)}
                 />
                 <span className="timesheet__day-earnings">
-                  {isLoading ? 'loading' : getDaysEarningsValue(hourRate, hoursWorked, day)}
+                  {isLoading
+                    ? (
+                      <CircularProgress
+                        color="secondary"
+                        size="1rem"
+                      />
+                    )
+                    : getDaysEarningsValue(hourRate, hoursWorked, day)}
                 </span>
               </div>
             )))
