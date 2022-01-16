@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { allEmployees, allWeeks, getRandomHours } from '../helpers/data-helpers';
+import { getAllEmployees, getAllWeeks, getRandomHours } from '../helpers/data-helpers';
 
 type TimesheetDataWeeks = {
   weekId: string;
@@ -16,6 +16,9 @@ type TimesheetData = {
   hourRate: number;
   hours: TimesheetDataWeeks[];
 }
+
+const allWeeks = getAllWeeks();
+const allEmployees = getAllEmployees();
 
 const timesheetData: TimesheetData[] = [];
 const weeks = allWeeks;
@@ -53,5 +56,5 @@ for (let i = 0; i < allEmployees.length; i += 1) {
   timesheetData.push(personData);
 }
 
-export { timesheetData };
+export { timesheetData, allEmployees, allWeeks };
 export type { TimesheetData, TimesheetDataWeeks };

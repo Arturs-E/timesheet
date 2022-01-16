@@ -2,6 +2,7 @@ import {
   startOfWeek, endOfWeek, subWeeks, format,
 } from 'date-fns';
 import { v4 as uuidv4 } from 'uuid';
+import Fakerator from 'fakerator';
 
 type Week = {
   id: string;
@@ -32,22 +33,22 @@ const getAllWeeks = (): Week[] => {
   return weeks;
 };
 
-const getAllEmployees = (): Employee[] => [
-  { id: uuidv4(), value: 'Emma Johnson' },
-  { id: uuidv4(), value: 'Jacob Williams' },
-  { id: uuidv4(), value: 'Sophia Davis' },
-];
+const fakerator = Fakerator();
+const getAllEmployees = (): Employee[] => {
+  const employees: Employee[] = [];
 
-const allWeeks = getAllWeeks();
-const allEmployees = getAllEmployees();
+  for (let i = 0; i < 5; i += 1) {
+    employees.push({ id: uuidv4(), value: fakerator.names.name() });
+  }
+  return employees;
+};
 
 const getRandomHours = (maxNumber: number): number => Math.floor(Math.random() * maxNumber);
 const getRandomHourRate = (maxNumber: number): number => Math.floor(Math.random() * maxNumber + 5);
 
 export {
-  allWeeks,
   getAllWeeks,
-  allEmployees,
+  getAllEmployees,
   getRandomHours,
   getRandomHourRate,
 };

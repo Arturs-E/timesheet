@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { DateRange, Person } from '@mui/icons-material';
 import FormSelect from '../../../components/form/form-select/FormSelect';
-import { allEmployees, allWeeks } from '../../../helpers/data-helpers';
 import { SelectValues } from '../../../pages/Timesheet';
 import './SelectionSection.scss';
+import { allEmployees, allWeeks } from '../../../data/timesheet-data';
 
 type SelectionSectionProps = {
   selectValues: SelectValues;
