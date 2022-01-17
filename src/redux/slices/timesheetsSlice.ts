@@ -32,28 +32,10 @@ const timesheetSlice = createSlice(({
       }
       return item;
     }),
-    changeLoadingState: (state, action: PayloadAction<UpdateHoursPayload>) => state.map((item) => {
-      if (item.nameId === action.payload.nameId) {
-        const hours = item.hours.map((week) => {
-          if (week.weekId === action.payload.weekId) {
-            const weeklyHours = week.weeklyHours.map((day) => {
-              if (day.day === action.payload.day) {
-                return { ...day, hoursWorked: action.payload.hours, isLoading: false };
-              }
-              return day;
-            });
-            return { ...week, weeklyHours };
-          }
-          return week;
-        });
-        return { ...item, hours };
-      }
-      return item;
-    }),
   },
 }));
 
-const { updateHours, changeLoadingState } = timesheetSlice.actions;
+const { updateHours } = timesheetSlice.actions;
 const timesheetSliceReducer = timesheetSlice.reducer;
 
-export { timesheetSliceReducer, updateHours, changeLoadingState };
+export { timesheetSliceReducer, updateHours };

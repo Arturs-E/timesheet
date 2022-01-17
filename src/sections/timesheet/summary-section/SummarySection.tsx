@@ -4,14 +4,14 @@ import { TimesheetDataWeeks } from '../../../data/timesheet-data';
 import './SummarySection.scss';
 
 type SummarySectionProps = {
-  isLoading: boolean;
+  isPageLoading: boolean;
   totalWeeklyHours: number | undefined;
   totalWeeklySalary: string | undefined;
   selectedEmployeesWeek: TimesheetDataWeeks | undefined;
 }
 
 const SummarySection:FC<SummarySectionProps> = ({
-  isLoading,
+  isPageLoading,
   totalWeeklyHours,
   totalWeeklySalary,
   selectedEmployeesWeek,
@@ -26,7 +26,7 @@ const SummarySection:FC<SummarySectionProps> = ({
         <tr>
           <th>Salary</th>
           <td>
-            {selectedEmployeesWeek && (isLoading
+            {selectedEmployeesWeek && (isPageLoading
               ? (<CircularProgress color="secondary" size="1rem" />)
               : totalWeeklySalary)}
           </td>

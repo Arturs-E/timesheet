@@ -2,9 +2,9 @@ import React, { FC, useEffect, useState } from 'react';
 import { CircularProgress } from '@mui/material';
 import FormInput from '../../../components/form/form-input/FormInput';
 import { getDaysEarningsValue } from '../../../helpers/timesheet-helpers';
-import { TimesheetDataWeeks } from '../../../data/timesheet-data';
+import { daysUpdateState, DaysUpdateState, TimesheetDataWeeks } from '../../../data/timesheet-data';
 import { useAppDispatch } from '../../../redux/store/hooks';
-import { changeLoadingState, updateHours } from '../../../redux/slices/timesheetsSlice';
+import { updateHours } from '../../../redux/slices/timesheetsSlice';
 import { SelectValues } from '../../../pages/Timesheet';
 import './HoursSection.scss';
 import Heading3 from '../../../components/headings/Heading3';
@@ -13,7 +13,7 @@ type HoursSectionProps = {
   selectedEmployeesWeek: TimesheetDataWeeks | undefined;
   hourRate: number | undefined;
   selectValues: SelectValues;
-  updatingHours: () => void;
+  updatingHours: (value: string) => void;
 }
 
 const HoursSection:FC<HoursSectionProps> = ({
@@ -23,29 +23,32 @@ const HoursSection:FC<HoursSectionProps> = ({
   updatingHours,
 }): JSX.Element => {
   const [isPageLoading, setIsPageLoading] = useState(true);
+  const [daysUpdate, setDaysUpdate] = useState<DaysUpdateState>(daysUpdateState);
 
   useEffect(() => {
     setIsPageLoading(true);
-    setTimeout(() => {
-      setIsPageLoading(false);
-    }, 500);
+    const timeout = setTimeout(() => { setIsPageLoading(false); }, 500);
+    return () => clearTimeout(timeout);
   }, [selectValues]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => { setDaysUpdate(daysUpdateState); }, 500);
+    return () => clearTimeout(timeout);
+  }, [daysUpdate]);
 
   const dispatch = useAppDispatch();
   const onHourChange = (hours: number, day: string): void => {
     dispatch(updateHours({
       nameId: selectValues.employee, weekId: selectValues.week, day, hours,
     }));
-    updatingHours();
+    updatingHours(day);
 
-    setTimeout(() => {
-      dispatch(changeLoadingState({
-        nameId: selectValues.employee, weekId: selectValues.week, day, hours,
-      }));
-    }, 500);
+    const updatedDays = { ...daysUpdate };
+    updatedDays[day] = true;
+    setDaysUpdate(updatedDays);
   };
 
-  const getDaysSalary = (isLoading: boolean, hoursWorked: number, day: string): JSX.Element | string => (isLoading
+  const getDaysSalary = (hoursWorked: number, day: string): JSX.Element | string => (daysUpdate[day]
     ? (<CircularProgress color="secondary" size="1rem" />)
     : getDaysEarningsValue(hourRate, hoursWorked, day));
 
@@ -54,7 +57,7 @@ const HoursSection:FC<HoursSectionProps> = ({
       {
         selectedEmployeesWeek
           ? (selectedEmployeesWeek
-            .weeklyHours.map(({ day, hoursWorked, isLoading }) => (
+            .weeklyHours.map(({ day, hoursWorked }) => (
               <div key={day} className="timesheet__hours-row">
                 <FormInput
                   label={day}
@@ -64,7 +67,7 @@ const HoursSection:FC<HoursSectionProps> = ({
                 <span className="timesheet__day-earnings">
                   {isPageLoading
                     ? (<CircularProgress color="secondary" size="1rem" />)
-                    : getDaysSalary(isLoading, hoursWorked, day)}
+                    : getDaysSalary(hoursWorked, day)}
                 </span>
               </div>
             )))

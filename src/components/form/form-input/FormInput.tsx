@@ -26,6 +26,7 @@ const FormInput:FC<FormInputProps> = ({ label, value, changeHandler }) => (
       maxWidth: 120,
       '& .MuiOutlinedInput-input': { padding: '0.8rem' },
       '& .MuiOutlinedInput-notchedOutline': { border: '2px solid var(--clr-primary)' },
+      '&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': { border: '2px solid var(--clr-input-hover)' },
     }}
   />
 );

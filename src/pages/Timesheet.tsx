@@ -25,9 +25,8 @@ const Timesheet = (): JSX.Element => {
 
   useEffect(() => {
     setIsPageLoading(true);
-    setTimeout(() => {
-      setIsPageLoading(false);
-    }, 500);
+    const timeout = setTimeout(() => { setIsPageLoading(false); }, 500);
+    return () => clearTimeout(timeout);
   }, [selectValues, areHoursUpdated]);
 
   return (
@@ -44,7 +43,7 @@ const Timesheet = (): JSX.Element => {
         updatingHours={() => setAreHoursUpdated(!areHoursUpdated)}
       />
       <SummarySection
-        isLoading={isPageLoading}
+        isPageLoading={isPageLoading}
         totalWeeklyHours={getTotalWeeklyHours(selectedEmployeesWeek)}
         totalWeeklySalary={getTotalWeeklySalary(hourRate, selectedEmployeesWeek)}
         selectedEmployeesWeek={selectedEmployeesWeek}

@@ -14,12 +14,12 @@ type Employee = {
   value: string;
 }
 
-const getAllWeeks = (): Week[] => {
+const getAllWeeks = (maxNumber: number): Week[] => {
   const weeks: Week[] = [];
   const endOfThisWeek = endOfWeek(new Date(), { weekStartsOn: 1 });
   const startOfThisWeek = startOfWeek(new Date(), { weekStartsOn: 1 });
 
-  for (let i = 0; i <= 4; i += 1) {
+  for (let i = 0; i < maxNumber; i += 1) {
     const monday = subWeeks(startOfThisWeek, i);
     const mondayToString = format(monday, 'dd MMM yyyy');
 
@@ -34,10 +34,10 @@ const getAllWeeks = (): Week[] => {
 };
 
 const fakerator = Fakerator();
-const getAllEmployees = (): Employee[] => {
+const getAllEmployees = (maxNumber: number): Employee[] => {
   const employees: Employee[] = [];
 
-  for (let i = 0; i < 5; i += 1) {
+  for (let i = 0; i < maxNumber; i += 1) {
     employees.push({ id: uuidv4(), value: fakerator.names.name() });
   }
   return employees;
