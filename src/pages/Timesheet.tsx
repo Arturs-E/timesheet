@@ -13,7 +13,8 @@ type SelectValues = {
 
 const Timesheet = (): JSX.Element => {
   const [selectValues, setSelectValues] = useState<SelectValues>({ employee: '', week: '' });
-  const [isPageLoading, setIsPageLoading] = useState(false);
+  const [areSelectFieldsChanged, setAreSelectFieldsChanged] = useState(false);
+  const [areHoursUpdated, setAreHoursUpdated] = useState(false);
 
   const selectedEmployeesWeek = useAppSelector((state) => state.timesheet
     .find((item) => item.nameId === selectValues.employee))
@@ -23,10 +24,16 @@ const Timesheet = (): JSX.Element => {
     .find((item) => item.nameId === selectValues.employee))?.hourRate;
 
   useEffect(() => {
-    setIsPageLoading(true);
-    const timeout = setTimeout(() => { setIsPageLoading(false); }, 500);
+    setAreSelectFieldsChanged(true);
+    const timeout = setTimeout(() => { setAreSelectFieldsChanged(false); }, 500);
     return () => clearTimeout(timeout);
-  }, [selectValues, selectedEmployeesWeek]);
+  }, [selectValues]);
+
+  useEffect(() => {
+    setAreHoursUpdated(true);
+    const timeout = setTimeout(() => { setAreHoursUpdated(false); }, 500);
+    return () => clearTimeout(timeout);
+  }, [selectedEmployeesWeek]);
 
   return (
     <div className="timesheet">
@@ -39,9 +46,11 @@ const Timesheet = (): JSX.Element => {
         selectedEmployeesWeek={selectedEmployeesWeek}
         hourRate={hourRate}
         selectValues={selectValues}
+        areSelectFieldsChanged={areSelectFieldsChanged}
       />
       <SummarySection
-        isPageLoading={isPageLoading}
+        areSelectFieldsChanged={areSelectFieldsChanged}
+        areHoursUpdated={areHoursUpdated}
         totalWeeklyHours={getTotalWeeklyHours(selectedEmployeesWeek)}
         totalWeeklySalary={getTotalWeeklySalary(hourRate, selectedEmployeesWeek)}
         selectedEmployeesWeek={selectedEmployeesWeek}

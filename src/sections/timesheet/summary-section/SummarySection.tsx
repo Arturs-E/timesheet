@@ -4,17 +4,19 @@ import { TimesheetDataWeeks } from '../../../data/timesheet-data';
 import './SummarySection.scss';
 
 type SummarySectionProps = {
-  isPageLoading: boolean;
+  areSelectFieldsChanged: boolean;
+  areHoursUpdated: boolean;
   totalWeeklyHours: number | undefined;
   totalWeeklySalary: string | undefined;
   selectedEmployeesWeek: TimesheetDataWeeks | undefined;
 }
 
 const SummarySection:FC<SummarySectionProps> = ({
-  isPageLoading,
+  areSelectFieldsChanged,
   totalWeeklyHours,
   totalWeeklySalary,
   selectedEmployeesWeek,
+  areHoursUpdated,
 }): JSX.Element => (
   <div className="timesheet__summary-container">
     <table className="timesheet__summary-table">
@@ -26,7 +28,7 @@ const SummarySection:FC<SummarySectionProps> = ({
         <tr>
           <th>Salary</th>
           <td>
-            {selectedEmployeesWeek && (isPageLoading
+            {selectedEmployeesWeek && (areSelectFieldsChanged || areHoursUpdated
               ? (<CircularProgress color="secondary" size="1rem" />)
               : totalWeeklySalary)}
           </td>

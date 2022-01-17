@@ -13,21 +13,16 @@ type HoursSectionProps = {
   selectedEmployeesWeek: TimesheetDataWeeks | undefined;
   hourRate: number | undefined;
   selectValues: SelectValues;
+  areSelectFieldsChanged: boolean;
 }
 
 const HoursSection:FC<HoursSectionProps> = ({
   selectedEmployeesWeek,
   hourRate,
   selectValues,
+  areSelectFieldsChanged,
 }): JSX.Element => {
-  const [isPageLoading, setIsPageLoading] = useState(true);
   const [daysUpdate, setDaysUpdate] = useState<DaysUpdateState>(daysUpdateState);
-
-  useEffect(() => {
-    setIsPageLoading(true);
-    const timeout = setTimeout(() => { setIsPageLoading(false); }, 500);
-    return () => clearTimeout(timeout);
-  }, [selectValues]);
 
   useEffect(() => {
     const timeout = setTimeout(() => { setDaysUpdate(daysUpdateState); }, 500);
@@ -62,7 +57,7 @@ const HoursSection:FC<HoursSectionProps> = ({
                   changeHandler={(value: string) => onHourChange(+value, day)}
                 />
                 <span className="timesheet__day-earnings">
-                  {isPageLoading
+                  {areSelectFieldsChanged
                     ? (<CircularProgress color="secondary" size="1rem" />)
                     : getDaysSalary(hoursWorked, day)}
                 </span>
