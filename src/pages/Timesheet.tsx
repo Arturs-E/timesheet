@@ -14,7 +14,6 @@ type SelectValues = {
 const Timesheet = (): JSX.Element => {
   const [selectValues, setSelectValues] = useState<SelectValues>({ employee: '', week: '' });
   const [isPageLoading, setIsPageLoading] = useState(false);
-  const [areHoursUpdated, setAreHoursUpdated] = useState(false);
 
   const selectedEmployeesWeek = useAppSelector((state) => state.timesheet
     .find((item) => item.nameId === selectValues.employee))
@@ -27,7 +26,7 @@ const Timesheet = (): JSX.Element => {
     setIsPageLoading(true);
     const timeout = setTimeout(() => { setIsPageLoading(false); }, 500);
     return () => clearTimeout(timeout);
-  }, [selectValues, areHoursUpdated]);
+  }, [selectValues, selectedEmployeesWeek]);
 
   return (
     <div className="timesheet">
@@ -40,7 +39,6 @@ const Timesheet = (): JSX.Element => {
         selectedEmployeesWeek={selectedEmployeesWeek}
         hourRate={hourRate}
         selectValues={selectValues}
-        updatingHours={() => setAreHoursUpdated(!areHoursUpdated)}
       />
       <SummarySection
         isPageLoading={isPageLoading}

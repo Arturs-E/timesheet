@@ -13,14 +13,12 @@ type HoursSectionProps = {
   selectedEmployeesWeek: TimesheetDataWeeks | undefined;
   hourRate: number | undefined;
   selectValues: SelectValues;
-  updatingHours: (value: string) => void;
 }
 
 const HoursSection:FC<HoursSectionProps> = ({
   selectedEmployeesWeek,
   hourRate,
   selectValues,
-  updatingHours,
 }): JSX.Element => {
   const [isPageLoading, setIsPageLoading] = useState(true);
   const [daysUpdate, setDaysUpdate] = useState<DaysUpdateState>(daysUpdateState);
@@ -41,7 +39,6 @@ const HoursSection:FC<HoursSectionProps> = ({
     dispatch(updateHours({
       nameId: selectValues.employee, weekId: selectValues.week, day, hours,
     }));
-    updatingHours(day);
 
     const updatedDays = { ...daysUpdate };
     updatedDays[day] = true;
