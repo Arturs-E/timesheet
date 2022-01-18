@@ -8,7 +8,7 @@ You can view the Figma design [HERE](https://www.figma.com/file/AdaF4Krqiw8Gt7PL
 
 You can see a working project here - https://timesheet-react-arturs.netlify.app/
 
-![Timesheet GIF](./public/readme-files/Timesheet.gif)
+![Timesheet GIF](./public/readme-files/Timesheet-2.gif)
 
 ## Project architecture
 
