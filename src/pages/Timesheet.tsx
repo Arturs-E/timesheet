@@ -25,13 +25,13 @@ const Timesheet = (): JSX.Element => {
 
   useEffect(() => {
     setAreSelectFieldsChanged(true);
-    const timeout = setTimeout(() => { setAreSelectFieldsChanged(false); }, 500);
+    const timeout = setTimeout(() => setAreSelectFieldsChanged(false), 500);
     return () => clearTimeout(timeout);
   }, [selectValues]);
 
   useEffect(() => {
     setAreHoursUpdated(true);
-    const timeout = setTimeout(() => { setAreHoursUpdated(false); }, 500);
+    const timeout = setTimeout(() => setAreHoursUpdated(false), 500);
     return () => clearTimeout(timeout);
   }, [selectedEmployeesWeek]);
 

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getTimesheetData, TimesheetData } from '../../helpers/data-helpers';
+import { getTimesheetData, TimesheetData } from '../../helpers/get-timesheet-data';
 
 type UpdateHoursPayload = {
   nameId: string;

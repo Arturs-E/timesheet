@@ -1,6 +1,10 @@
-import { TimesheetDataWeeks } from './data-helpers';
+import { TimesheetDataWeeks } from './get-timesheet-data';
 
 const EUR_SYMBOL = '\u20AC';
+
+const getRandomNumberBetweenTwo = (minNumber: number, maxNumber: number): number => (
+  Math.floor(Math.random() * (maxNumber - minNumber) + minNumber)
+);
 
 const getDaysEarnings = (hours: number, hourRate: number, day: string): number => (
   day === 'saturday' || day === 'sunday'
@@ -33,5 +37,9 @@ const getTotalWeeklySalary = (
 };
 
 export {
-  getDaysEarnings, getDaysEarningsValue, getTotalWeeklyHours, getTotalWeeklySalary,
+  getDaysEarnings,
+  getDaysEarningsValue,
+  getTotalWeeklyHours,
+  getTotalWeeklySalary,
+  getRandomNumberBetweenTwo,
 };

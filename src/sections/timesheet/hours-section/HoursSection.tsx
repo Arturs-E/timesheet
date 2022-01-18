@@ -8,7 +8,7 @@ import { updateHours } from '../../../redux/slices/timesheetsSlice';
 import { SelectValues } from '../../../pages/Timesheet';
 import './HoursSection.scss';
 import Heading3 from '../../../components/headings/Heading3';
-import { TimesheetDataWeeks } from '../../../helpers/data-helpers';
+import { TimesheetDataWeeks } from '../../../helpers/get-timesheet-data';
 
 type HoursSectionProps = {
   selectedEmployeesWeek: TimesheetDataWeeks | undefined;
@@ -26,7 +26,7 @@ const HoursSection:FC<HoursSectionProps> = ({
   const [daysUpdate, setDaysUpdate] = useState<DaysUpdateState>(daysUpdateState);
 
   useEffect(() => {
-    const timeout = setTimeout(() => { setDaysUpdate(daysUpdateState); }, 500);
+    const timeout = setTimeout(() => setDaysUpdate(daysUpdateState), 500);
     return () => clearTimeout(timeout);
   }, [daysUpdate]);
 
