@@ -1,4 +1,4 @@
-import { TimesheetDataWeeks } from '../data/timesheet-data';
+import { TimesheetDataWeeks } from './data-helpers';
 
 const EUR_SYMBOL = '\u20AC';
 

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { timesheetData, TimesheetData } from '../../data/timesheet-data';
+import { getTimesheetData, TimesheetData } from '../../helpers/data-helpers';
 
 type UpdateHoursPayload = {
   nameId: string;
@@ -8,7 +8,7 @@ type UpdateHoursPayload = {
   hours: number;
 }
 
-const initialState: TimesheetData[] = timesheetData;
+const initialState: TimesheetData[] = getTimesheetData();
 
 const timesheetSlice = createSlice(({
   name: 'timesheet',

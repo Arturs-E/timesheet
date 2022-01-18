@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { CircularProgress } from '@mui/material';
-import { TimesheetDataWeeks } from '../../../data/timesheet-data';
 import './SummarySection.scss';
+import { TimesheetDataWeeks } from '../../../helpers/data-helpers';
 
 type SummarySectionProps = {
   areSelectFieldsChanged: boolean;
