@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { CircularProgress } from '@mui/material';
 import FormInput from '../../../components/form/form-input/FormInput';
 import { getDaysEarningsValue } from '../../../helpers/timesheet-helpers';
-import { daysUpdateState, DaysUpdateState} from '../../../data/timesheet-data';
+import { daysUpdateState, DaysUpdateState } from '../../../data/timesheet-data';
 import { useAppDispatch } from '../../../redux/store/hooks';
 import { updateHours } from '../../../redux/slices/timesheetsSlice';
 import { SelectValues } from '../../../pages/Timesheet';
