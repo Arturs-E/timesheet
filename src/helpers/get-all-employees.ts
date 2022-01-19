@@ -5,7 +5,9 @@ type Employee = {
   id: string;
   value: string;
 }
+
 const fakerator = Fakerator();
+
 const getAllEmployees = (maxNumber: number): Employee[] => {
   const employees: Employee[] = [];
 
@@ -14,4 +16,5 @@ const getAllEmployees = (maxNumber: number): Employee[] => {
   }
   return employees;
 };
+
 export default getAllEmployees;
