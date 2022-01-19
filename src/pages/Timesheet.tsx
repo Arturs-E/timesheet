@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Timesheet.scss';
 import { useAppSelector } from '../redux/store/hooks';
 import SummarySection from '../sections/timesheet/summary-section/SummarySection';
-import { getTotalWeeklyHours, getTotalWeeklySalary } from '../helpers/timesheet-helpers';
+import { formatSalary, getTotalWeeklyHours, getTotalWeeklySalary } from '../helpers/timesheet-helpers';
 import SelectionSection from '../sections/timesheet/selection-section/SelectionSection';
 import HoursSection from '../sections/timesheet/hours-section/HoursSection';
 
@@ -52,7 +52,7 @@ const Timesheet = (): JSX.Element => {
         areSelectFieldsChanged={areSelectFieldsChanged}
         areHoursUpdated={areHoursUpdated}
         totalWeeklyHours={getTotalWeeklyHours(selectedEmployeesWeek)}
-        totalWeeklySalary={getTotalWeeklySalary(hourRate, selectedEmployeesWeek)}
+        totalWeeklySalary={formatSalary(getTotalWeeklySalary(hourRate, selectedEmployeesWeek))}
         selectedEmployeesWeek={selectedEmployeesWeek}
       />
     </div>

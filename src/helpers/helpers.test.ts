@@ -1,8 +1,8 @@
 import getAllEmployees from './get-all-employees';
 import getAllWeeks from './get-all-weeks';
 import {
-  getDaysEarnings,
-  getDaysEarningsValue,
+  formatSalary,
+  getDaysSalary,
   getRandomNumberBetweenTwo,
   getTotalWeeklyHours, getTotalWeeklySalary,
 } from './timesheet-helpers';
@@ -75,23 +75,23 @@ describe('Helper functions', () => {
     });
   });
 
-  describe('Get days earnings function', () => {
-    const hours = 10;
-    const hourRate = 5;
-    const weekdayEarnings = getDaysEarnings(hours, hourRate, 'monday');
-
-    it('should return double if day is saturday', () => {
-      expect(getDaysEarnings(hours, hourRate, 'saturday')).toBe(2 * weekdayEarnings);
-    });
-    it('should return double if day is sunday', () => {
-      expect(getDaysEarnings(hours, hourRate, 'sunday')).toBe(2 * weekdayEarnings);
+  describe('Format salary function', () => {
+    it('should return formatted string with EUR sign and double decimals', () => {
+      const salary = formatSalary(50);
+      expect(salary).toBe('\u20AC50.00');
     });
   });
 
-  describe('Get days earnings value function', () => {
-    it('should return formatted string with EUR sign and double decimals', () => {
-      const earnings = getDaysEarningsValue(5, 10, 'monday');
-      expect(earnings).toBe('\u20AC50.00');
+  describe('Get days salary function', () => {
+    const hours = 10;
+    const hourRate = 5;
+    const weekdayEarnings = getDaysSalary(hours, hourRate, 'monday');
+
+    it('should return double if day is saturday', () => {
+      expect(getDaysSalary(hours, hourRate, 'saturday')).toBe(2 * weekdayEarnings);
+    });
+    it('should return double if day is sunday', () => {
+      expect(getDaysSalary(hours, hourRate, 'sunday')).toBe(2 * weekdayEarnings);
     });
   });
 
@@ -105,8 +105,8 @@ describe('Helper functions', () => {
   });
 
   describe('Get total weekly salary function', () => {
-    it('should return the correct total weekly salary as a formatted string with EUR sign and double decimals', () => {
-      expect(getTotalWeeklySalary(10, weekData)).toBe('\u20AC610.00');
+    it('should return the correct total weekly salaries', () => {
+      expect(getTotalWeeklySalary(10, weekData)).toBe(610);
     });
     it('should return undefined if argument is undefined', () => {
       expect(getTotalWeeklySalary(10, undefined)).toBe(undefined);

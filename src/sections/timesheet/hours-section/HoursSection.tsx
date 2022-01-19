@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { CircularProgress } from '@mui/material';
 import FormInput from '../../../components/form/form-input/FormInput';
-import { getDaysEarningsValue } from '../../../helpers/timesheet-helpers';
+import { formatSalary, getDaysSalary } from '../../../helpers/timesheet-helpers';
 import { daysUpdateState, DaysUpdateState } from '../../../data/timesheet-data';
 import { useAppDispatch } from '../../../redux/store/hooks';
 import { updateHours } from '../../../redux/slices/timesheetsSlice';
@@ -41,9 +41,15 @@ const HoursSection:FC<HoursSectionProps> = ({
     setDaysUpdate(updatedDays);
   };
 
-  const getDaysSalary = (hoursWorked: number, day: string): JSX.Element | string => (daysUpdate[day]
-    ? (<CircularProgress color="secondary" size="1rem" />)
-    : getDaysEarningsValue(hourRate, hoursWorked, day));
+  const getValueForDaysSalary = (hoursWorked: number, day: string): JSX.Element | string => {
+    if (daysUpdate[day] || areSelectFieldsChanged) {
+      return (<CircularProgress color="secondary" size="1rem" />);
+    }
+    if (hourRate) {
+      return formatSalary(getDaysSalary(hoursWorked, hourRate, day));
+    }
+    return '';
+  };
 
   return (
     <div className="timesheet__hours-container">
@@ -58,9 +64,7 @@ const HoursSection:FC<HoursSectionProps> = ({
                   changeHandler={(value: string) => onHourChange(+value, day)}
                 />
                 <span className="timesheet__day-earnings">
-                  {areSelectFieldsChanged
-                    ? (<CircularProgress color="secondary" size="1rem" />)
-                    : getDaysSalary(hoursWorked, day)}
+                  {getValueForDaysSalary(hoursWorked, day)}
                 </span>
               </div>
             )))
