@@ -5,8 +5,11 @@ type DaysUpdateState = {
   [key: string]: boolean;
 }
 
-const allWeeks = getAllWeeks(5);
-const allEmployees = getAllEmployees(5);
+const NUMBER_OF_EMPLOYEES = 5;
+const NUMBER_OF_WEEKS = 5;
+
+const allWeeks = getAllWeeks(NUMBER_OF_WEEKS);
+const allEmployees = getAllEmployees(NUMBER_OF_EMPLOYEES);
 
 const daysUpdateState: DaysUpdateState = {
   monday: false,
@@ -19,6 +22,10 @@ const daysUpdateState: DaysUpdateState = {
 };
 
 export {
-  allEmployees, allWeeks, daysUpdateState,
+  allEmployees,
+  allWeeks,
+  daysUpdateState,
+  NUMBER_OF_WEEKS,
+  NUMBER_OF_EMPLOYEES,
 };
 export type { DaysUpdateState };

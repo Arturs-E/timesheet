@@ -4,10 +4,11 @@ import {
   formatSalary,
   getDaysSalary,
   getRandomNumberBetweenTwo,
-  getTotalWeeklyHours, getTotalWeeklySalary,
+  getTotalWeeklyHours,
+  getTotalWeeklySalary,
 } from './timesheet-helpers';
 import { getTimesheetData } from './get-timesheet-data';
-import { allEmployees } from '../data/timesheet-data';
+import { NUMBER_OF_EMPLOYEES, NUMBER_OF_WEEKS } from '../data/timesheet-data';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -34,16 +35,16 @@ const weekData = {
 
 describe('Helper functions', () => {
   describe('Get all employees function', () => {
-    it('should have array length of 5', () => {
-      const employees = getAllEmployees(5);
-      expect(employees).toHaveLength(5);
+    it(`should have array length of ${NUMBER_OF_EMPLOYEES}`, () => {
+      const employees = getAllEmployees(NUMBER_OF_EMPLOYEES);
+      expect(employees).toHaveLength(NUMBER_OF_EMPLOYEES);
     });
   });
 
   describe('Get all weeks function', () => {
-    const weeks = getAllWeeks(5);
-    it('should have array length of 5', () => {
-      expect(weeks).toHaveLength(5);
+    const weeks = getAllWeeks(NUMBER_OF_WEEKS);
+    it(`should have array length of ${NUMBER_OF_WEEKS}`, () => {
+      expect(weeks).toHaveLength(NUMBER_OF_WEEKS);
     });
     it('array should have an object with id and value keys', () => {
       expect(weeks[0]).toEqual(expect.objectContaining({
@@ -114,9 +115,8 @@ describe('Helper functions', () => {
   });
 
   describe('Get timesheet data function', () => {
-    it('should return an array of length 5', () => {
-      const { length } = allEmployees;
-      expect(getTimesheetData()).toHaveLength(length);
+    it(`should return an array of length ${NUMBER_OF_EMPLOYEES}`, () => {
+      expect(getTimesheetData()).toHaveLength(NUMBER_OF_EMPLOYEES);
     });
   });
 });
