@@ -29,22 +29,22 @@ describe('FormSelect component', () => {
     expect(selectElement).toBeInTheDocument();
   });
 
-  it('should show all select options when select is clicked', async () => {
+  it('should show all select options when select is clicked', () => {
     render(<MockComponent />);
     const selectElement: HTMLDivElement = screen.getByRole('button');
     fireEvent.mouseDown(selectElement);
 
-    const selectOptions: HTMLLIElement[] = await screen.findAllByRole('option');
+    const selectOptions: HTMLLIElement[] = screen.getAllByRole('option');
     expect(selectOptions).toHaveLength(3);
   });
 
-  it('should be able to select an option', async () => {
+  it('should be able to select an option', () => {
     render(<MockComponent />);
     const inputElement: HTMLInputElement = screen.getByDisplayValue('');
     const selectElement: HTMLDivElement = screen.getByRole('button');
     fireEvent.mouseDown(selectElement);
 
-    const firstOption: HTMLLIElement = await screen.findByText('First option');
+    const firstOption: HTMLLIElement = screen.getByText('First option');
     fireEvent.click(firstOption);
     expect(inputElement.value).toBe('1');
   });
