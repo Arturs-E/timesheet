@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { useState } from 'react';
-import FormSelect from './FormSelect';
+import FormSelect from '../FormSelect';
 
 const labelText = 'Test label';
 const options = [

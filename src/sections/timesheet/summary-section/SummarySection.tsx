@@ -23,11 +23,11 @@ const SummarySection:FC<SummarySectionProps> = ({
       <tbody>
         <tr>
           <th>Hours worked</th>
-          <td>{totalWeeklyHours}</td>
+          <td data-testid="weekly-hours">{totalWeeklyHours}</td>
         </tr>
         <tr>
           <th>Salary</th>
-          <td>
+          <td data-testid="weekly-salary">
             {selectedEmployeesWeek && (areSelectFieldsChanged || areHoursUpdated
               ? (<CircularProgress color="secondary" size="1rem" />)
               : totalWeeklySalary)}

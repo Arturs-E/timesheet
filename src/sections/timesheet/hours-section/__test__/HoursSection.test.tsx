@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { FC } from 'react';
-import HoursSection from './HoursSection';
-import { store } from '../../../redux/store/store';
-import { TimesheetDataWeeks } from '../../../helpers/get-timesheet-data';
-import { EUR_SYMBOL } from '../../../helpers/timesheet-helpers';
+import HoursSection from '../HoursSection';
+import { store } from '../../../../redux/store/store';
+import { TimesheetDataWeeks } from '../../../../helpers/get-timesheet-data';
+import { EUR_SYMBOL } from '../../../../helpers/timesheet-helpers';
 
 type MockComponentProps = {
   selectedEmployeesWeek: TimesheetDataWeeks | undefined;

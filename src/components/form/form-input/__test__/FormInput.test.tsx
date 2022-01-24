@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import FormInput from './FormInput';
+import FormInput from '../FormInput';
 
 const labelText = 'Test label';
 const MockComponent = ():JSX.Element => {

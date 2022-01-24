@@ -1,14 +1,14 @@
-import getAllEmployees from './get-all-employees';
-import getAllWeeks from './get-all-weeks';
+import getAllEmployees from '../get-all-employees';
+import getAllWeeks from '../get-all-weeks';
 import {
   formatSalary,
   getDaysSalary,
   getRandomNumberBetweenTwo,
   getTotalWeeklyHours,
   getTotalWeeklySalary,
-} from './timesheet-helpers';
-import { getTimesheetData } from './get-timesheet-data';
-import { NUMBER_OF_EMPLOYEES, NUMBER_OF_WEEKS } from '../data/timesheet-data';
+} from '../timesheet-helpers';
+import { getTimesheetData } from '../get-timesheet-data';
+import { NUMBER_OF_EMPLOYEES, NUMBER_OF_WEEKS } from '../../data/timesheet-data';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
