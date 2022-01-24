@@ -53,7 +53,7 @@ describe('SummarySection component', () => {
     />);
 
     const hoursElement: HTMLTableDataCellElement = screen.getByTestId('weekly-hours');
-    expect(hoursElement.textContent).toBe('');
+    expect(hoursElement).toHaveTextContent('');
   });
 
   it('should not show weekly salary if data is undefined', () => {
@@ -66,7 +66,7 @@ describe('SummarySection component', () => {
     />);
 
     const salaryElement: HTMLTableDataCellElement = screen.getByTestId('weekly-salary');
-    expect(salaryElement.textContent).toBe('');
+    expect(salaryElement).toHaveTextContent('');
   });
 
   it('should show weekly hours if data is available', () => {
@@ -79,7 +79,7 @@ describe('SummarySection component', () => {
     />);
 
     const hoursElement: HTMLTableDataCellElement = screen.getByTestId('weekly-hours');
-    expect(hoursElement.textContent).toBe('40');
+    expect(hoursElement).toHaveTextContent('40');
   });
 
   it('should show weekly salary if data is available', () => {
@@ -92,6 +92,6 @@ describe('SummarySection component', () => {
     />);
 
     const salaryElement: HTMLTableDataCellElement = screen.getByTestId('weekly-salary');
-    expect(salaryElement.textContent).toBe(`${EUR_SYMBOL}400.00`);
+    expect(salaryElement).toHaveTextContent(`${EUR_SYMBOL}400.00`);
   });
 });

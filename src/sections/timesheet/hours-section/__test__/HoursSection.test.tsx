@@ -78,7 +78,7 @@ describe('HoursSection component', () => {
     const mondaysSalary: HTMLSpanElement = screen.getByTestId(/days-salary-id-0/i);
 
     const daysSalary = `${EUR_SYMBOL}${(+mondaysInputElement.value * hourRate).toFixed(2)}`;
-    expect(mondaysSalary.textContent).toBe(daysSalary);
+    expect(mondaysSalary).toHaveTextContent(daysSalary);
   });
 
   it('should not show days salary if fields have changed', () => {
@@ -87,6 +87,6 @@ describe('HoursSection component', () => {
     const mondaysSalary: HTMLSpanElement = screen.getByTestId(/days-salary-id-0/i);
 
     const daysSalary = `${EUR_SYMBOL}${(+mondaysInputElement.value * hourRate).toFixed(2)}`;
-    expect(mondaysSalary.textContent).not.toBe(daysSalary);
+    expect(mondaysSalary).not.toHaveTextContent(daysSalary);
   });
 });
