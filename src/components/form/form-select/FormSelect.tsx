@@ -7,7 +7,7 @@ type FormSelectProps = {
   options: { id: string, value: string }[];
   value: string;
   changeHandler: (value: string) => void;
-  icon: ReactElement;
+  icon?: ReactElement;
 }
 
 const FormSelect:FC<FormSelectProps> = ({
