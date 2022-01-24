@@ -11,6 +11,7 @@ const FormInput:FC<FormInputProps> = ({ label, value, changeHandler }) => (
   <TextField
     variant="outlined"
     id={`${label}-input`}
+    data-testid="form-input-test-id"
     label={label}
     type="number"
     value={value}

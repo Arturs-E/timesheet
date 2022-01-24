@@ -39,4 +39,5 @@ export {
   getTotalWeeklySalary,
   formatSalary,
   getRandomNumberBetweenTwo,
+  EUR_SYMBOL,
 };

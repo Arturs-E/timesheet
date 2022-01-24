@@ -56,14 +56,14 @@ const HoursSection:FC<HoursSectionProps> = ({
       {
         selectedEmployeesWeek
           ? (selectedEmployeesWeek
-            .weeklyHours.map(({ day, hoursWorked }) => (
+            .weeklyHours.map(({ day, hoursWorked }, index) => (
               <div key={day} className="timesheet__hours-row">
                 <FormInput
                   label={day}
                   value={hoursWorked}
                   changeHandler={(value: string) => onHourChange(+value, day)}
                 />
-                <span className="timesheet__day-earnings">
+                <span className="timesheet__day-earnings" data-testid={`days-salary-id-${index}`}>
                   {getValueForDaysSalary(hoursWorked, day)}
                 </span>
               </div>
